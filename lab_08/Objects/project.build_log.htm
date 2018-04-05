@@ -27,16 +27,15 @@ Project File Date:  03/23/2018
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Target 1'
+compiling main.c...
 compiling InputCapture.c...
-InputCapture.c(31): warning:  #223-D: function "sprintf" declared implicitly
-  				sprintf(str, "%d", (int)(((double)pulse_width)/148));   // calculate and create string for distance
-InputCapture.c(32): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
-  				LCD_DisplayString(str);   //dispay distance in inches
-InputCapture.c: 2 warnings, 0 errors
+InputCapture.c(36): warning:  #223-D: function "sprintf" declared implicitly
+  			sprintf(str, "%d", (int)(timeSpan)); //prints frequency
+InputCapture.c: 1 warning, 0 errors
 linking...
-Program Size: Code=5902 RO-data=498 RW-data=36 ZI-data=1636  
+Program Size: Code=5238 RO-data=498 RW-data=36 ZI-data=1636  
 FromELF: creating hex file...
-".\Objects\project.axf" - 0 Error(s), 2 Warning(s).
+".\Objects\project.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -59,7 +58,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.1.1
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

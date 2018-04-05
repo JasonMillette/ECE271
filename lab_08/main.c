@@ -46,11 +46,14 @@ int main(void){
 	//AF mode, AF value = 2 (TIM1_CH1), high-speed, push-pull
 	GPIOB->AFR[0] &= ~(GPIO_AFRL_AFSEL6);
 	GPIOB->AFR[0] |= GPIO_AFRL_AFSEL6_1;
-	
+
+
 	RCC->APB1ENR1 |= RCC_APB1ENR1_TIM4EN;   //added 1 might be incorrect
+
+	TIM4->CR1 &= ~TIM_CR1_UDIS;
 	
 	//set up an appropriate prescalar to slow down the timers input clock
-	TIM4->PSC = 15;
+	TIM4->PSC = 159;
 	
 	//set Auto-reload value to maximum value
 	TIM4->ARR = 0xFFFF; //maximum 16-bit value
@@ -94,7 +97,7 @@ int main(void){
 	
 	//enable timer 4 interrupt in the interrupt controller (NVIC)
 	NVIC_EnableIRQ(TIM4_IRQn);
-		
+	
 	LCD_DisplayString((uint8_t*)"LAB 08");
 
 	while (1) {
