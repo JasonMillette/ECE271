@@ -1,0 +1,15 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+                       
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\hsi_init.d -o.\objects\hsi_init.o -I.\RTE\_Target_1 -
+IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include -IC:\Keil_v5\ARM\PACK\Keil\S
+TM32L4xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include -IC:\Keil_v5\ARM\P
+ACK\Keil\STM32L4xx_DFP\2.0.0\Device\Include --predefine="__EVAL SETA 1" --prede
+fine="__UVISION_VERSION SETA 524" --predefine="_RTE_ SETA 1" --predefine="STM32
+L476xx SETA 1" --list=.\listings\hsi_init.lst HSI_init.s
+334 symbols in table
