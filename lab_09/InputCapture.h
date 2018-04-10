@@ -3,7 +3,6 @@
 //ECE 271
 #ifndef __STM32L476G_DISCOVERY_InputCapture_H
 #define __STM32L476G_DISCOVERY_InputCapture_H
-volatile char str[6] = {' ', ' ', ' ', ' ', ' ', ' '};
 
 void TIM4_Init(void);
 char * itoa(int);

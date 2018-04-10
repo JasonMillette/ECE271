@@ -45,7 +45,7 @@ void TIM1_Init ()
 	TIM1->PSC = .6; //16 MHZ / (1 + .6) = 10MHz
 	
 	// Auto-reload
-	TIM1->ARR = 99;  //PWM period = (99 + 1) * 1/10MHz = 10us
+	TIM1->ARR = 199;  //PWM period = (199 + 1) * 1/10MHz = 20us
 	
 	//clear output compare mode bits for channel 1
 	TIM1->CCMR1 &= ~TIM_CCMR1_OC1M;
@@ -66,7 +66,7 @@ void TIM1_Init ()
 	TIM1->BDTR |= TIM_BDTR_MOE;
 	
 	// Output compare register for channel 1
-	TIM1->CCR1 = 50; //for 20% duty cycle
+	TIM1->CCR1 = 140; //for % duty cycle
 	
 	//enable counter
 	TIM1->CR1 |= TIM_CR1_CEN;
