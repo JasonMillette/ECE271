@@ -7,25 +7,30 @@
 	
 	AREA TIM4Init, CODE
 	EXPORT TIM4_Init
-	EXPORT TIM4_IRQHandler
+ 	;EXPORT TIM4_IRQHandler
 	ALIGN
 	ENTRY
 	
 TIM4_Init PROC
+	LDR R1, =RCC_BASE					;enable the clock for TIM4
+	LDR R2, [R1, #RCC_APB1ENR1]
+	ORR R2, R2, #RCC_APB1ENR1_TIM4EN
+	STR R2, [R1, #RCC_APB1ENR1]
+	
 	LDR R1, =RCC_BASE					;Enable the clock to gpio port E
-	LDR R2, [R1, #RCC_AHB2ENR]
-	ORR R2, #RCC_AHB2ENR_GPIOEEN
+	LDR R2, [R1, #RCC_AHB2ENR]			
+	ORR R2, R2, #RCC_AHB2ENR_GPIOEEN
 	str R2, [R1, #RCC_AHB2ENR]
 		
 	LDR R1, =RCC_BASE					;Enable the clock to gpio port B
 	LDR R2, [R1, #RCC_AHB2ENR]
-	ORR R2, #RCC_AHB2ENR_GPIOBEN
+	ORR R2, R2, #RCC_AHB2ENR_GPIOBEN
 	str R2, [R1, #RCC_AHB2ENR]
 	
 	LDR R1, =GPIOB_BASE					;Setting mode as AF
 	LDR R2, [R1, #GPIO_MODER]
 	BIC R2, R2, #GPIO_MODER_MODER6
-	ORR R2, #GPIO_MODER_MODER6_1
+	ORR R2, R2, #GPIO_MODER_MODER6_1
 	str R2, [R1, #GPIO_MODER]	
 	
 	LDR R1, =GPIOB_BASE				;Setting NO PULL UP PULL DOWN
@@ -33,97 +38,88 @@ TIM4_Init PROC
 	BIC R2, R2, #GPIO_PUPDR_PUPDR6
 	str R2, [R1, #GPIO_PUPDR]	
 	
-	LDR R1, =GPIOB_BASE				;Setting AF MODE
+	LDR R1, =GPIOB_BASE					;Setting AF MODE
 	LDR R2, [R1, #GPIO_AFR0]
 	BIC R2, R2, #GPIO_AFRL_AFRL6
 	ORR R2, R2, #GPIO_BSRR_BR_9
 	str R2, [R1, #GPIO_AFR0]	
 	
-	LDR R1, =GPIOB_BASE				;Setting AF MODE
-	LDR R2, [R1, #GPIO_AFR0]
-	BIC R2, R2, #GPIO_AFRL_AFRL6
-	ORR R2, R2, #0x02000000
-	str R2, [R1, #GPIO_AFR0]	
-	
-	LDR R1, =TIM4_BASE				;Setting ARR to 0xFFFF
+	LDR R1, =TIM4_BASE					;Setting ARR to 0xFFFF
 	LDR R2, [R1, #TIM_ARR]
 	MOV R2, #0xFFFF
 	str R2, [R1, #TIM_ARR]
 	
-	LDR R1, =TIM4_BASE				;Setting PSC to 159
+	LDR R1, =TIM4_BASE					;Setting PSC to 159
 	LDR R2, [R1, #TIM_PSC]
-	ORR R2, #159
+	MOV R2, #15
 	str R2, [R1, #TIM_PSC]
 	
-	LDR R1, =TIM4_BASE				;Setting direction of channel 1 as input
+	LDR R1, =TIM4_BASE					;Setting direction of channel 1 as input
 	LDR R2, [R1, #TIM_CCMR1]
 	BIC R2, R2, #TIM_CCMR1_CC1S
-	ORR R2, #TIM_CCMR1_CC1S_0
+	ORR R2, R2, #TIM_CCMR1_CC1S_0
 	str R2, [R1, #TIM_CCMR1]
 	
-	LDR R1, =TIM4_BASE				;Setting direction of channel 1 as input
+	LDR R1, =TIM4_BASE					;Disable filtering
 	LDR R2, [R1, #TIM_CCMR1]
 	BIC R2, R2, #TIM_CCMR1_IC1F
 	str R2, [R1, #TIM_CCMR1]
 	
-	LDR R1, =TIM4_BASE				;Setting direction of channel 1 as input
+	LDR R1, =TIM4_BASE					;Set rising falling edge
 	LDR R2, [R1, #TIM_CCER]
 	ORR R2, R2, #TIM_CCER_CC1P
 	ORR R2, #TIM_CCER_CC1NP
 	str R2, [R1, #TIM_CCER]
 	
-	LDR R1, =TIM4_BASE				;Setting direction of channel 1 as input
+	LDR R1, =TIM4_BASE					;clear prescalar
 	LDR R2, [R1, #TIM_CCMR1]
 	BIC R2, R2, #TIM_CCMR1_IC1PSC
 	str R2, [R1, #TIM_CCMR1]
 	
-	LDR R1, =TIM4_BASE				;Setting direction of channel 1 as input
+	LDR R1, =TIM4_BASE					;channel 1 timer 4 input
 	LDR R2, [R1, #TIM_CCER]
-	ORR R2, #TIM_CCER_CC1E
+	ORR R2, R2, #TIM_CCER_CC1E
 	str R2, [R1, #TIM_CCER]
 	
-	LDR R1, =TIM4_BASE				;Setting direction of channel 1 as input
+	LDR R1, =TIM4_BASE					;DMA requests not needed
 	LDR R2, [R1, #TIM_DIER]
-	ORR R2, #TIM_DIER_CC1IE
+	ORR R2, R2, #TIM_DIER_CC1IE
 	str R2, [R1, #TIM_DIER]
 	
-	LDR R1, =TIM4_BASE				;Setting direction of channel 1 as input
+	LDR R1, =TIM4_BASE					;DMA requests not needed
 	LDR R2, [R1, #TIM_DIER]
-	ORR R2, #TIM_DIER_CC1DE
+	ORR R2, R2, #TIM_DIER_CC1DE
 	str R2, [R1, #TIM_DIER]
 	
-	LDR R1, =TIM4_BASE				;Setting direction of channel 1 as input
+	LDR R1, =TIM4_BASE					;enable timer counter
 	LDR R2, [R1, #TIM_CR1]
-	ORR R2, #TIM_CR1_CEN
+	ORR R2, R2, #TIM_CR1_CEN
 	str R2, [R1, #TIM_CR1]
 	
-	LDR R1, =TIM4_BASE				;Setting direction of channel 1 as input
-	LDR R2, [R1, #TIM_CCMR1]
-	BIC R2, R2, #TIM_CCMR1_CC1S
-	ORR R2, #TIM_CCMR1_CC1S_0
-	str R2, [R1, #TIM_CCMR1]
 	
-	;Interrupt priority
-	PUSH {R4, LR}
-	LSL R2, R1, #4					;R2 = priority << 4
-	LDR R3, =NVIC_BASE				;NVIC base address
-	LDR R4, =NVIC_IP0				;Interrupt priority register
+	;Set Interrupt priority
+	MOV R0, #30
+	MOV R1, #1
+	LSL R2, R1, #4						;R2 = priority << 4
+	LDR R3, =NVIC_BASE					;NVIC base address
+	LDR R4, =NVIC_IP0					;Interrupt priority register
 	ADD R3, R3, R4					
-	STRB R2, [R3, R0]				;save priority; dont use STR
-	POP {R4, PC}
+	STRB R2, [R3, R0]					;save priority; dont use STR
 	
-	;interrupt enable
-	PUSH {R4, LR}
-	AND R2, R0, #0x1F				;bit offset in a word
+	;enable interrupt
+	AND R2, R0, #0x1F					;bit offset in a word
 	MOV R3, #1
-	LSL R3, R3, R2					;R3 = 1 << (IRQn & 0x1F)
+	LSL R3, R3, R2						;R3 = 1 << (IRQn & 0x1F)
 	LDR R4, =NVIC_BASE
 	
-	ADD R1, R4, R1					;R1 = addr, of NVIC->ISER0
-	LSR R2, R0, #5					;Memory offser (in words): IRQn >> 5
-	STR R3, [R1, R2]				;Enable/disable interrupt
-	POP {R4, PC}
+	CMP R1, #0
+	LDRNE R1, =NVIC_ISER0
+	LDREQ R1, =NVIC_ICER0
 	
+	ADD R1, R4, R1						;R1 = addr, of NVIC->ISER0
+	LSR R2, R0, #5						;Memory offser (in words): IRQn >> 5
+	STR R3, [R1, R2]					;Enable/disable interrupt
+
 	BX LR
 	ENDP
 		
@@ -131,7 +127,6 @@ TIM4_IRQHandler PROC
 				EXPORT 	TIM4_IRQHandler
 				
 				PUSH {R4, R6, R10, lr}
-				
 				LDR R0, = TIM4_BASE  				;Pseudo instruction
 				LDR R2, [R0, #TIM_SR] 				;read status register
 				AND R3, R2, #TIM_SR_UIF 			;check update event flag

@@ -411,19 +411,24 @@
               <FilePath>.\LCD.h</FilePath>
             </File>
             <File>
-              <FileName>PWM.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\PWM.c</FilePath>
-            </File>
-            <File>
               <FileName>TIMInit.s</FileName>
               <FileType>2</FileType>
               <FilePath>.\TIMInit.s</FilePath>
             </File>
             <File>
-              <FileName>itoa.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>.\itoa.s</FilePath>
+              <FileName>SYSTICK.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SYSTICK.c</FilePath>
+            </File>
+            <File>
+              <FileName>SYSTICK.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\SYSTICK.h</FilePath>
+            </File>
+            <File>
+              <FileName>InputCapture.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\InputCapture.c</FilePath>
             </File>
           </Files>
         </Group>

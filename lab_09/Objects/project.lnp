@@ -3,9 +3,9 @@
 ".\objects\startup_stm32l476xx.o"
 ".\objects\stm32l476xx_constants.o"
 ".\objects\lcd.o"
-".\objects\pwm.o"
 ".\objects\timinit.o"
-".\objects\itoa.o"
+".\objects\systick.o"
+".\objects\inputcapture.o"
 --strict --scatter ".\Objects\project.sct"
 --diag_suppress=L6314W --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
