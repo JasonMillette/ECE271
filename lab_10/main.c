@@ -35,12 +35,17 @@ int main(void){
 	while(1) {
 		ADC1->CR |= ADC_CR_ADSTART; //one conversion
 		while((ADC123_COMMON->CSR & ADC_CSR_EOC_MST) != ADC_CSR_EOC_MST);
-		sprintf(str,"%d",(ADC1->DR)/13);  //display voltage on LCD
+		sprintf(str,"%d",((ADC1->DR)/13));  //display voltage on LCD
 		LCD_DisplayString(str);
 		if (ADC1->DR/13 > 200)					//toggle RED LED if Voltage above 2V
 			GPIOB->ODR |= GPIO_ODR_OD2;
 		else if (ADC1->DR/13 < 100)
 			GPIOB->ODR &= ~GPIO_ODR_OD2;
+		
+		if (ADC1->DR/13 > 290)				//Toggles green LED when object gets close ~5inches
+			GPIOE->ODR &= ~GPIO_ODR_OD8;
+		else
+			GPIOE->ODR |= GPIO_ODR_OD8;
 	}
 	
 }

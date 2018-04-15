@@ -29,12 +29,12 @@ Project File Date:  04/12/2018
 Build target 'Target 1'
 compiling main.c...
 main.c(38): warning:  #223-D: function "sprintf" declared implicitly
-  		sprintf(str,"%d",(ADC1->DR)/13);  //display voltage on LCD
+  		sprintf(str,"%d",((ADC1->DR)/13));  //display voltage on LCD
 main.c(39): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
   		LCD_DisplayString(str);
 main.c: 2 warnings, 0 errors
 linking...
-Program Size: Code=4826 RO-data=498 RW-data=28 ZI-data=1636  
+Program Size: Code=4914 RO-data=498 RW-data=28 ZI-data=1636  
 FromELF: creating hex file...
 ".\Objects\project.axf" - 0 Error(s), 2 Warning(s).
 
